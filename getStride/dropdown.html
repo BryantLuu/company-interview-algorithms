@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <input type="text" id="first" name="" value="">
+        <div id="menu">
+            <ul id="possible_choices">
+            </ul>
+        </div>
+    </body>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        $("#first").keyup((event) => {
+            $("#menu").show()
+            console.log($("#first").val())
+            const searchStr = $("#first").val().toUpperCase()
+            const newList = []
+            const choices = [
+                "COUNT",
+                "SUM",
+                "MAX",
+                "MIN",
+                "AVG",
+            ]
+            $("#possible_choices").empty()
+            choices.forEach((word) => {
+                if(word.toUpperCase().startsWith(searchStr)) {
+                    $("#possible_choices").append(
+                        `<li onMouseDown=fillInput('${word}')>${word}</li>`
+                    )
+                }
+            })
+            console.log(newList)
+        })
+        $("#first").blur((event) => {
+            $("#menu").hide()
+        })
+        $("#first").focus((event) => {
+            $("#menu").show()
+        })
+        const fillInput = (word) => {
+            $("#first").val(word)
+            $("#possible_choices").empty()
+            $("#possible_choices").append(
+                `<li onMouseDown=fillInput('${word}')>${word}</li>`
+            )
+            $("#menu").hide()
+        }
+    </script>
+</html>
